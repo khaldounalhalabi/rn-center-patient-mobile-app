@@ -78,7 +78,7 @@ const Login = () => {
               href={"/reset-password"}
               className="text-sm underline hover:underline cursor-pointer text-foreground web:select-text"
             >
-              {t("auth.resetPassword")}
+              <Text>{t("auth.resetPassword")}</Text>
             </Link>
           </View>
           <View className="w-full mt-4 flex flex-row justify-center items-center gap-1 opacity-80">
@@ -87,7 +87,7 @@ const Login = () => {
               href={"/register"}
               className="text-sm underline hover:underline cursor-pointer text-foreground web:select-text"
             >
-              {t("auth.sign_up")}
+              <Text>{t("auth.sign_up")}</Text>
             </Link>
           </View>
         </CardContent>

@@ -133,7 +133,7 @@ const Register = () => {
                 href={"/login"}
                 className="text-sm underline hover:underline cursor-pointer text-foreground web:select-text"
               >
-                {t("auth.Login")}
+                <Text>{t("auth.Login")}</Text>
               </Link>
             </View>
           </CardContent>
