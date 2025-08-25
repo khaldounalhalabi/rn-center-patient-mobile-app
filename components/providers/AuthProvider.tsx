@@ -6,8 +6,8 @@ const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
   const router = useRouter();
   const { user, initialized } = useUser();
   useEffect(() => {
-    if (!user && initialized) {
-      router.replace("/role-select");
+    if (user && !user.phone_verified_at && initialized) {
+      router.replace("/verify-phone");
     }
   }, [user, initialized]);
   return <>{children}</>;

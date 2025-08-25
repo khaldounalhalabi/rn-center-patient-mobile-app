@@ -36,7 +36,7 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
   const router = useRouter();
   const fcmToken = useFcmToken();
   const [handlers, setHandlers] = useState<NotificationHandler[]>([]);
-  const { user, role } = useUser();
+  const { user } = useUser();
   const queryClient = useQueryClient();
 
   const handleMessage = async (payload: RemoteMessage) => {
@@ -80,9 +80,8 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
     handlers.forEach((handler) => {
       handler.fn(notification);
     });
-    const notificationsCount = (
-      await NotificationService.make(role).unreadCount()
-    ).data.unread_count;
+    const notificationsCount = (await NotificationService.make().unreadCount())
+      .data.unread_count;
     await Notifications.setBadgeCountAsync(notificationsCount ?? 0);
 
     await Notifications.scheduleNotificationAsync({
@@ -119,7 +118,7 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
     return () => {
       tapSubscription.remove();
     };
-  }, [router, role]);
+  }, [router]);
 
   return (
     <NotificationsHandlersContext.Provider value={setHandlers}>

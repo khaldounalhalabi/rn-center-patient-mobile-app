@@ -1,26 +1,30 @@
 import { getNestedPropertyValue } from "@/helpers/helpers";
-import { Dayjs } from "dayjs";
 import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { View } from "react-native";
-import { Label } from "../ui/label";
 import { Text } from "../ui/text";
-import Datepicker from "./datepicker";
+import Select from "./Select";
 
 interface Props {
   name: string;
-  defaultValue?: string | Dayjs;
+  options: any[];
+  defaultValue?: string | undefined;
   label?: string;
   required?: boolean;
-  onChange?: (date: Dayjs) => void;
+  placeholder?: string;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
 }
 
-const FormDatepicker = ({
+const FormSelect = ({
   name,
+  options,
   defaultValue,
   label,
   required,
+  placeholder,
   onChange,
+  disabled = false,
 }: Props) => {
   const {
     control,
@@ -39,19 +43,18 @@ const FormDatepicker = ({
 
   return (
     <View className="w-full flex flex-col justify-start gap-2 min-w-full">
-      <Label className="w-full">
-        <Text>{label}</Text>
-      </Label>
       <Controller
         control={control}
         name={name}
-        render={({ field: { onChange: rhfOnChange, value } }) => (
-          <Datepicker
-            defaultValue={value}
-            onChange={(date) => {
-              rhfOnChange(date.format("YYYY-MM-DD"));
+        render={({ field: { onChange: fieldOnChange, value } }) => (
+          <Select
+            data={options}
+            selected={value}
+            label={label}
+            onChange={(selectedValue) => {
+              fieldOnChange(selectedValue);
               if (onChange) {
-                onChange(date);
+                onChange(selectedValue);
               }
             }}
           />
@@ -64,4 +67,4 @@ const FormDatepicker = ({
   );
 };
 
-export default FormDatepicker;
+export default FormSelect;

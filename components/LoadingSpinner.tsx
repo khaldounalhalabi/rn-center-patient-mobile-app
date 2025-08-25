@@ -5,7 +5,7 @@ import { Animated, Easing } from "react-native";
 
 const LoadingSpinner = ({
   className = undefined,
-  size = 32,
+  size = 16,
 }: {
   className?: string;
   size?: number;

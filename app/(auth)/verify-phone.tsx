@@ -12,12 +12,14 @@ import { AuthService } from "@/services/AuthService";
 import { useState } from "react";
 import { View } from "react-native";
 const VerifyPhone = () => {
-  const { signInRole, role, setUser } = useUser();
-  const service = AuthService.make(signInRole ?? role);
+  const { setUser } = useUser();
+  const service = AuthService.make();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const onSubmit = async (data: any) => {
-    return await service.verifyPhone(data.verification_code);
+    const response = await service.verifyPhone(data.verification_code);
+    console.log(response);
+    return response;
   };
 
   const onSuccess = async (data: ApiResponse<AuthResponse>) => {

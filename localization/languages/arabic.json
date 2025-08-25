@@ -1429,7 +1429,10 @@
     "verification_code": "رمز التحقق",
     "resend_verification_code": "إعادة إرسال رمز التحقق",
     "didnt_get_code": "لم تصلك الرسالة النصية؟",
-    "what_is_your_phone": "ما هو رقم هاتفك؟"
+    "what_is_your_phone": "ما هو رقم هاتفك؟",
+    "sign_up": "تسجيل حساب",
+    "dont_have_account": "ليس لديك حساب ؟",
+    "have_an_account": "لديك حساب ؟"
   },
   "contact_and_payment": {
     "phone": "تواصل معنا",

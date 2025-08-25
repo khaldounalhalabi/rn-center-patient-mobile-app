@@ -15,12 +15,9 @@ const useUser = () => {
   return {
     user: context?.user,
     setUser: context?.setUser,
-    role: context?.role,
     permissions: context?.user?.permissions,
     initializeUser: context.initializeUser,
     initialized: context.initialized,
-    signInRole: context.signInRole,
-    setSignInRole: context.setSignInRole,
   };
 };
 

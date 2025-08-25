@@ -1,14 +1,28 @@
 import useUser from "@/hooks/UserHook";
-import { useRouter } from "expo-router";
+import { useTranslation } from "@/localization";
+import { usePathname, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Button } from "../ui/button";
 import { Text } from "../ui/text";
+
+const authPages = [
+  "/login",
+  "/register",
+  "/reset-password-code",
+  "/reset-password",
+  "/reset-phone-first",
+  "/set-new-password",
+  "/verify-phone",
+];
 
 const ProfileButton = () => {
   const { user } = useUser();
   const router = useRouter();
-  if (!user) return <></>;
-  return (
+  const { t } = useTranslation();
+  const pathname = usePathname();
+
+  return user ? (
     <Pressable
       onPress={() => {
         router.push("/account");
@@ -23,6 +37,24 @@ const ProfileButton = () => {
         </AvatarFallback>
       </Avatar>
     </Pressable>
+  ) : (
+    <Button
+      variant={"outline"}
+      onPress={() => {
+        authPages.includes(pathname)
+          ? router.replace("/")
+          : router.replace("/login");
+      }}
+    >
+      <Text
+        className="text-xs"
+        style={{
+          fontSize: 12,
+        }}
+      >
+        {authPages.includes(pathname) ? t("landing.home") : t("auth.Login")}
+      </Text>
+    </Button>
   );
 };
 

@@ -16,9 +16,8 @@ import { View } from "react-native";
 
 const ResetPassword = () => {
   const router = useRouter();
-  const { signInRole } = useUser();
   const { t } = useTranslation();
-  const service = AuthService.make(signInRole);
+  const service = AuthService.make();
   const handleSubmit = (data: { phone: string }) => {
     return service.passwordResetRequest(data.phone);
   };

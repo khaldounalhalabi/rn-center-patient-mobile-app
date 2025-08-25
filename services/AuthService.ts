@@ -19,7 +19,7 @@ export class AuthService extends BaseService<AuthService, AuthResponse>() {
   public successStatus: boolean = false;
 
   getBaseUrl(): string {
-    return `/${this.role}`;
+    return `/customer`;
   }
 
   public async login(phone: string, password: string) {
@@ -128,10 +128,10 @@ export class AuthService extends BaseService<AuthService, AuthResponse>() {
     return await this.errorHandler(res);
   }
   public logout = async () => {
+    this.router.replace("/login");
     await deleteTokens();
     await deleteRole();
     await deleteUser();
-    this.router.replace("/role-select");
   };
 
   public async verifyPhone(verificationCode: string) {
@@ -168,5 +168,24 @@ export class AuthService extends BaseService<AuthService, AuthResponse>() {
     }
 
     return this.errorHandler(response);
+  }
+
+  public async register(data: Record<string, any>) {
+    const response = await POST<AuthResponse>(
+      `customer/register`,
+      data,
+      this.headers,
+    );
+
+    if (response.ok()) {
+      await setToken(response?.data?.token, response?.data?.refresh_token);
+      await setRole(response?.data?.user?.role);
+      await setUser(response?.data?.user);
+      await setPhone(response.data.user.phone);
+      this.router.replace("/verify-phone");
+      return response;
+    }
+
+    return response;
   }
 }

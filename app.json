@@ -1,24 +1,15 @@
 {
   "expo": {
-    "name": "Reslan Alnaal Center Employee App",
-    "slug": "reslan_alnaal_center",
+    "name": "Reslan Alnaal Center Patient App",
+    "slug": "reslan-alnaal-center-patient-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon.png",
-    "scheme": "reslanalnaalcenter",
+    "scheme": "reslanalnaalcenterpatientapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "ExpoLocalization_supportsRTL": true,
-        "ExpoLocalization_forcesRTL": true,
-        "ITSAppUsesNonExemptEncryption": false
-      },
-      "bundleIdentifier": "reslan.alnaal.center"
-    },
     "android": {
-      "package": "reslan.alnaal.center",
+      "package": "reslan.alnaal.center.patient.app",
       "icon": "./assets/images/app-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-icon.png",
@@ -28,7 +19,10 @@
       "googleServicesFile": "./google-services.json",
       "permissions": [
         "android.permission.READ_CALENDAR",
-        "android.permission.WRITE_CALENDAR"
+        "android.permission.WRITE_CALENDAR",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.VIBRATE"
       ]
     },
     "web": {
@@ -42,14 +36,8 @@
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": [
-              "en",
-              "ar"
-            ],
-            "android": [
-              "en",
-              "ar"
-            ]
+            "ios": ["en", "ar"],
+            "android": ["en", "ar"]
           }
         }
       ],
@@ -147,10 +135,7 @@
     },
     "extra": {
       "router": {},
-      "supportsRTL": true,
-      "eas": {
-        "projectId": "8c1febb4-06e0-4930-975a-929be419e92e"
-      }
+      "supportsRTL": true
     },
     "owner": "khaldounalhalabi"
   }

@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
-import useUser from "@/hooks/UserHook";
 import { useTranslation } from "@/localization";
 import { AuthService } from "@/services/AuthService";
 import { useState } from "react";
@@ -19,8 +18,7 @@ import { View } from "react-native";
 
 const ResetPasswordCode = () => {
   const [loading, setLoading] = useState(false);
-  const { signInRole } = useUser();
-  const service = AuthService.make(signInRole);
+  const service = AuthService.make();
   const { t } = useTranslation();
 
   const handleResetButton = async () => {
@@ -61,7 +59,9 @@ const ResetPasswordCode = () => {
               onPress={handleResetButton}
             >
               <Text>{t("auth.resendThecode")}</Text>
-              {loading && <LoadingSpinner />}
+              {loading && (
+                <LoadingSpinner className="text-secondary-foreground" />
+              )}
             </Button>
           </Form>
         </CardContent>

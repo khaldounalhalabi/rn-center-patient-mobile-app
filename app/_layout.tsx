@@ -1,12 +1,10 @@
 import "@/global.css";
 
-import { LanguageToggleButton } from "@/components/LanguageToggleButton";
-import NotificationsButton from "@/components/NotificationsButton";
 import ProfileButton from "@/components/profile/ProfileButton";
 import LocationTrackingProvider from "@/components/providers/LocationTrackingProvider";
 import NotificationProvider from "@/components/providers/NotificationProvider";
 import UserProvider from "@/components/providers/UserProvider";
-import { ThemeToggle } from "@/components/ui/ThemeToggleButton";
+import RightSideHeader from "@/components/RightSideHeader";
 import { LanguageProvider } from "@/context/LanguageProvider";
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/useColorScheme";
@@ -42,8 +40,8 @@ Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowBanner: true,
     shouldShowList: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
   }),
 });
 
@@ -125,13 +123,7 @@ export default function RootLayout() {
                     <Stack
                       screenOptions={{
                         headerShown: true,
-                        headerRight: () => (
-                          <>
-                            <ThemeToggle />
-                            <LanguageToggleButton />
-                            <NotificationsButton />
-                          </>
-                        ),
+                        headerRight: () => <RightSideHeader />,
                         headerTitle: "",
                         headerLeft: () => <ProfileButton />,
                       }}

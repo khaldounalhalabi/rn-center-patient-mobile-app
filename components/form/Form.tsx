@@ -80,9 +80,7 @@ const Form = ({
         )}
         <Button
           disabled={methods.formState.isSubmitting || disabled}
-          onPress={methods.handleSubmit(onSubmit, (errors, event) => {
-            console.log(errors);
-          })}
+          onPress={methods.handleSubmit(onSubmit)}
           className="flex flex-row justify-center gap-3 items-center w-full"
         >
           <Text>{buttonText}</Text>

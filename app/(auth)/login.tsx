@@ -2,7 +2,6 @@ import Form from "@/components/form/Form";
 import FormInput from "@/components/inputs/FormInput";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
-import { RoleEnum } from "@/enums/RoleEnum";
 import { setPhone } from "@/helpers/helpers";
 import useUser from "@/hooks/UserHook";
 import { ApiResponse } from "@/http/Response";
@@ -14,9 +13,9 @@ import { useState } from "react";
 import { View } from "react-native";
 
 const Login = () => {
-  const { signInRole, setUser } = useUser();
+  const { setUser } = useUser();
   const [error, setError] = useState(false);
-  const service = AuthService.make(signInRole);
+  const service = AuthService.make();
   const router = useRouter();
   const { t } = useTranslation();
   const onSubmit = async (data: any) => {
@@ -83,16 +82,12 @@ const Login = () => {
             </Link>
           </View>
           <View className="w-full mt-4 flex flex-row justify-center items-center gap-1 opacity-80">
+            <Text>{t("auth.dont_have_account")}</Text>
             <Link
-              href={"/role-select"}
+              href={"/register"}
               className="text-sm underline hover:underline cursor-pointer text-foreground web:select-text"
             >
-              {t("auth.change_user_type", {
-                user_type:
-                  signInRole == RoleEnum.SECRETARY
-                    ? t("types_statuses.doctor")
-                    : t("types_statuses.secretary"),
-              })}
+              {t("auth.sign_up")}
             </Link>
           </View>
         </CardContent>

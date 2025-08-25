@@ -8,7 +8,7 @@ export function BaseService<SERVICE, MODEL>() {
   return class BaseService {
     protected static instance?: SERVICE;
     public baseUrl = "/";
-    public role: string = "customer";
+    public role: string = RoleEnum.CUSTOMER;
     protected headers: Record<string, any> = {};
     public router: Router;
 
@@ -16,7 +16,7 @@ export function BaseService<SERVICE, MODEL>() {
       this.router = useRouter();
     }
 
-    public static make(role: RoleEnum = RoleEnum.ADMIN): SERVICE {
+    public static make(role: RoleEnum = RoleEnum.CUSTOMER): SERVICE {
       if (!this.instance) {
         // @ts-ignore
         this.instance = new this();
@@ -154,9 +154,9 @@ export function BaseService<SERVICE, MODEL>() {
       if (res.code == 401 || res.code == 403) {
         deleteTokens();
         deleteRole();
-        this.router.replace("/role-select");
+        this.router.replace("/login");
       } else if (res.code == 407) {
-        this.router.replace("/role-select");
+        this.router.replace("/login");
       }
 
       if (res.notVerified()) {
