@@ -1,9 +1,10 @@
 import Form from "@/components/form/Form";
+import FormDatepicker from "@/components/inputs/FormDatepicker";
 import FormInput from "@/components/inputs/FormInput";
 import FormRadio from "@/components/inputs/FormRadio";
+import FormSelect from "@/components/inputs/FormSelect";
 import LoadingScreen from "@/components/LoadingScreen";
 import Page from "@/components/page";
-import { useTranslateEnum } from "@/components/TranslatableEnum";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -14,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Text } from "@/components/ui/text";
+import BloodGroupEnum from "@/enums/BloodGroupEnum";
 import GenderEnum from "@/enums/GenderEnum";
 import { getEnumValues } from "@/helpers/helpers";
 import useUser from "@/hooks/UserHook";
@@ -28,7 +30,6 @@ import { View } from "react-native";
 
 const Edit = () => {
   const { t } = useTranslation();
-  const translateEnum = useTranslateEnum();
   const { setUser, user: storedUser } = useUser();
   const service = AuthService.make();
   const {
@@ -37,7 +38,7 @@ const Edit = () => {
     refetch,
   } = useQuery({
     queryKey: ["user_data"],
-    queryFn: async () => service.me(),
+    queryFn: async () => service.userDetails(),
     select(data) {
       return data.data;
     },
@@ -46,12 +47,11 @@ const Edit = () => {
   const handleSubmit = async (data: any) => {
     return await service.updateUserDetails(data).then((res) => {
       if (res.ok()) {
+        setUser(res.data.user);
         if (storedUser?.phone != res.data?.user?.phone) {
           service.logout().then(() => {
             router.replace("/verify-phone");
           });
-        } else {
-          setUser(res.data.user);
         }
       }
       refetch();
@@ -84,30 +84,54 @@ const Edit = () => {
             defaultValues={user}
           >
             <FormInput
-              name={"first_name"}
-              type={"text"}
+              name="first_name"
               label={t("details.first-Name")}
+              type="text"
+              returnKeyLabel="next"
+              textContentType="givenName"
+              defaultValue={user?.first_name}
             />
             <FormInput
-              name={"last_name"}
-              type={"text"}
+              name="last_name"
               label={t("details.last-name")}
-            />
-            <FormInput
-              name={"phone"}
-              type={"tel"}
-              label={t("auth.phone")}
-              dataDetectorTypes={"phoneNumber"}
-              autoComplete="tel-device"
+              type="text"
+              returnKeyLabel="next"
+              textContentType="familyName"
+              defaultValue={user?.last_name}
             />
 
             <FormRadio
-              name="gender"
-              label={t("details.gender")}
               options={getEnumValues(GenderEnum).map((i) => ({
-                label: translateEnum(i),
+                label: t(`types_statuses.${i}` as any),
                 value: i,
               }))}
+              name="gender"
+              defaultChecked={user?.gender}
+              label={t("details.gender")}
+            />
+
+            <FormDatepicker
+              name="birth_date"
+              label={t("details.birthDate")}
+              defaultValue={user?.customer?.birth_date}
+            />
+
+            <FormSelect
+              options={getEnumValues(BloodGroupEnum)}
+              name="blood_group"
+              label={t("details.blood")}
+              defaultValue={user?.customer?.blood_group}
+            />
+
+            <FormInput
+              name="phone"
+              label={t("auth.phone")}
+              type="tel"
+              dataDetectorTypes={"phoneNumber"}
+              autoComplete="tel-device"
+              returnKeyType="next"
+              textContentType="telephoneNumber"
+              defaultValue={user?.phone}
             />
             <View className="w-full">
               <UpdatePasswordDialog user={user} />
@@ -122,11 +146,16 @@ const Edit = () => {
 export default Edit;
 
 const UpdatePasswordDialog = ({ user }: { user?: User }) => {
-  const service = AuthService.make(user?.role);
+  const service = AuthService.make();
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
   const onSubmit = async (data: any) => {
-    return service.updateUserDetails(data);
+    const response = await service.updateUserDetails({
+      ...user,
+      ...(user?.customer ?? {}),
+      ...data,
+    });
+    return response;
   };
 
   const onSuccess = async () => {

@@ -49,7 +49,7 @@ const FormSelect = ({
         render={({ field: { onChange: fieldOnChange, value } }) => (
           <Select
             data={options}
-            selected={value}
+            selected={defaultValue}
             label={label}
             onChange={(selectedValue) => {
               fieldOnChange(selectedValue);

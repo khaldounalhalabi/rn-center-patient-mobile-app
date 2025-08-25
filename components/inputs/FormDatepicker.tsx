@@ -47,7 +47,7 @@ const FormDatepicker = ({
         name={name}
         render={({ field: { onChange: rhfOnChange, value } }) => (
           <Datepicker
-            defaultValue={value}
+            defaultValue={value ?? defaultValue}
             onChange={(date) => {
               rhfOnChange(date.format("YYYY-MM-DD"));
               if (onChange) {

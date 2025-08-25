@@ -1,5 +1,5 @@
 "use client";
-import { setUser } from "@/helpers/helpers";
+import { getToken, setUser } from "@/helpers/helpers";
 import { User } from "@/models/User";
 import { AuthService } from "@/services/AuthService";
 import { createContext, useCallback, useEffect, useState } from "react";
@@ -15,9 +15,11 @@ export const UserContext = createContext<{
 const UserProvider = ({ children }: { children?: React.ReactNode }) => {
   const [user, updateUser] = useState<User | undefined>(undefined);
   const [isInitialized, setIsInitialized] = useState(false);
-
+  const service = AuthService.make();
   useEffect(() => {
-    initializeUser();
+    initializeUser().then(() => {
+      setIsInitialized(true);
+    });
   }, []);
 
   const fillUser = useCallback((newUser: User | undefined) => {
@@ -31,12 +33,12 @@ const UserProvider = ({ children }: { children?: React.ReactNode }) => {
   }, []);
 
   const initializeUser = async () => {
-    const res = await AuthService.make().me();
+    setIsInitialized(false);
+    const res = await service.userDetails();
     if (res.ok()) {
       fillUser(res.data);
       await setUser(res.data);
     }
-    setIsInitialized(true);
     return res.data;
   };
 

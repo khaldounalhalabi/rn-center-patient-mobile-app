@@ -3,7 +3,6 @@ import FormInput from "@/components/inputs/FormInput";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import { setPhone } from "@/helpers/helpers";
-import useUser from "@/hooks/UserHook";
 import { useTranslation } from "@/localization";
 import { AuthService } from "@/services/AuthService";
 import { useRouter } from "expo-router";
@@ -11,9 +10,8 @@ import { View } from "react-native";
 
 const ResetPhoneFirst = () => {
   const { t } = useTranslation();
-  const { signInRole, role } = useUser();
   const router = useRouter();
-  const service = AuthService.make(signInRole ?? role);
+  const service = AuthService.make();
   const onSubmit = async (data: any) => {
     await setPhone(data.phone);
     return await service.resendVerificationCode();

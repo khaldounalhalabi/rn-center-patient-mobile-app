@@ -18,7 +18,6 @@ const VerifyPhone = () => {
   const [loading, setLoading] = useState(false);
   const onSubmit = async (data: any) => {
     const response = await service.verifyPhone(data.verification_code);
-    console.log(response);
     return response;
   };
 

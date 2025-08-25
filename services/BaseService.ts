@@ -14,16 +14,14 @@ export function BaseService<SERVICE, MODEL>() {
 
     protected constructor() {
       this.router = useRouter();
+      this.role = RoleEnum.SECRETARY;
     }
 
-    public static make(role: RoleEnum = RoleEnum.CUSTOMER): SERVICE {
+    public static make(): SERVICE {
       if (!this.instance) {
         // @ts-ignore
         this.instance = new this();
       }
-      // @ts-ignore
-      this.instance.role = role;
-
       // @ts-ignore
       this.instance.baseUrl = this.instance.getBaseUrl();
 

@@ -8,7 +8,7 @@ const LoadingScreen = () => {
         "flex-1 h-screen w-screen items-center justify-center bg-background"
       }
     >
-      <LoadingSpinner className="text-foreground" />
+      <LoadingSpinner className="text-foreground" size={40} />
     </View>
   );
 };

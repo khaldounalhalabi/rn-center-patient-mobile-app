@@ -28,6 +28,7 @@ export class AuthService extends BaseService<AuthService, AuthResponse>() {
       password: password,
     });
 
+    await setPhone(phone);
     if (response.ok()) {
       await setToken(response?.data?.token, response?.data?.refresh_token);
       await setRole(response?.data?.user?.role);
@@ -109,34 +110,28 @@ export class AuthService extends BaseService<AuthService, AuthResponse>() {
     return response;
   }
   public async userDetails(): Promise<ApiResponse<User>> {
-    const res = await GET<User>(`/${this.role}/me`);
-    return await this.errorHandler(res);
-  }
-
-  public async me(): Promise<ApiResponse<User>> {
-    const res = await GET<User>(`/me`);
-    return await this.errorHandler(res);
+    return await GET<User>(`customer/me`);
   }
 
   public async updateUserDetails(
     data: any,
   ): Promise<ApiResponse<AuthResponse>> {
-    const res = await POST<AuthResponse>(`${this.role}/update-user-data`, data);
+    const res = await POST<AuthResponse>(`customer/update-user-data`, data);
     if (res.ok()) {
       await setPhone(res?.data?.user?.phone);
     }
     return await this.errorHandler(res);
   }
   public logout = async () => {
-    this.router.replace("/login");
     await deleteTokens();
     await deleteRole();
     await deleteUser();
+    this.router.replace("/login");
   };
 
   public async verifyPhone(verificationCode: string) {
     const response = await POST<boolean>(
-      `/${this.role}/verify`,
+      `/customer/verify`,
       {
         verification_code: verificationCode,
       },

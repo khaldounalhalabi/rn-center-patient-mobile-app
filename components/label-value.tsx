@@ -113,11 +113,11 @@ export const Value: React.FC<ValueProps> = ({
   return (
     <Text
       className={
-        className ?? `text-start text-primary text-xs font-normal md:text-base`
+        className ?? `text-start text-xs font-normal md:text-base`
       }
       {...props}
     >
-      {!children ? <Text>{showedValue}</Text> : children}
+      {!children ? showedValue : children}
     </Text>
   );
 };

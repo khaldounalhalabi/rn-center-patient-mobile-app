@@ -39,7 +39,7 @@ const Datepicker = ({
     <>
       <Pressable onPress={open} className="w-full">
         <Label>{label}</Label>
-        <View className="w-full p-1.5 border border-foreground rounded-md">
+        <View className="w-full p-3 border border-muted rounded-md">
           <Text>
             {date?.format("YYYY-MM-DD") ?? t("components.datepicker")}
           </Text>

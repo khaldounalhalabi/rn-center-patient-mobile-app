@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
 import StyledText from "@/components/ui/styled-text";
-import { RoleEnum } from "@/enums/RoleEnum";
-import useUser from "@/hooks/UserHook";
 import { Bell } from "@/lib/icons/icons";
 import { NotificationService } from "@/services/NotificationService";
 import { useQuery } from "@tanstack/react-query";
@@ -11,12 +9,10 @@ import { View } from "react-native";
 
 const NotificationsButton = () => {
   const router = useRouter();
-  const { role } = useUser();
   const { data: unreadCount } = useQuery({
     queryKey: ["unread_notifications_count"],
-    queryFn: async () => await NotificationService.make(role).unreadCount(),
+    queryFn: async () => await NotificationService.make().unreadCount(),
     select: (data) => data?.data?.unread_count ?? 0,
-    enabled: role != undefined && role != RoleEnum.PUBLIC,
   });
 
   return (

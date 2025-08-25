@@ -38,6 +38,56 @@ const Details = () => {
       </View>
 
       <View className="flex flex-row items-center justify-between w-full">
+        <Text> {t("details.birthDate")}</Text>
+        <Badge>
+          <Text>{user?.customer?.birth_date}</Text>
+        </Badge>
+      </View>
+
+      <View className="flex flex-row items-center justify-between w-full">
+        <Text> {t("details.blood")}</Text>
+        <Badge>
+          <Text>{user?.customer?.blood_group}</Text>
+        </Badge>
+      </View>
+
+      <View className="flex flex-row items-center justify-between w-full">
+        <Text> {t("details.age")}</Text>
+        <Badge>
+          <Text>{user?.customer?.age}</Text>
+        </Badge>
+      </View>
+
+      <View className="flex items-start justify-between gap-3 w-full">
+        <Text> {t("common.patient.create.healthStatus")}</Text>
+        <Badge>
+          <Text>
+            {user?.customer?.health_status ?? (
+              <TranslatableEnum value="no_data" />
+            )}
+          </Text>
+        </Badge>
+      </View>
+
+      <View className="flex items-start gap-3 justify-between w-full">
+        <Text> {t("details.birthDate")}</Text>
+        <Badge>
+          <Text>
+            {user?.customer?.notes ?? <TranslatableEnum value="no_data" />}
+          </Text>
+        </Badge>
+      </View>
+
+      {user?.customer?.other_data?.map((item) => (
+        <View className="flex flex-row items-center justify-between w-full">
+          <Text> {item.key}</Text>
+          <Badge>
+            <Text>{item.value ?? <TranslatableEnum value="no_data" />}</Text>
+          </Badge>
+        </View>
+      ))}
+
+      <View className="flex flex-row items-center justify-between w-full">
         <Text> {t("details.phone")}</Text>
         <Badge>
           <Text>{user?.phone}</Text>
