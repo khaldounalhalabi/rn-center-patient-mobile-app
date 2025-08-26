@@ -3,7 +3,7 @@ import useUser from "@/hooks/UserHook";
 import { Calendar } from "@/lib/icons/icons";
 import { i18n, useTranslation } from "@/localization";
 import { Tabs } from "expo-router";
-import { HomeIcon } from "lucide-react-native";
+import { CrossIcon, HomeIcon } from "lucide-react-native";
 import React from "react";
 
 const TabLayout = () => {
@@ -38,6 +38,17 @@ const TabLayout = () => {
               fontFamily: locale == "en" ? "kodchasan" : "cairo",
             },
             href: user ? { pathname: "/appointments" } : null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="clinics"
+          options={{
+            title: t("components.doctors"),
+            tabBarIcon: ({ color }) => <CrossIcon color={color} />,
+            tabBarLabelStyle: {
+              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+            },
           }}
         />
         <Tabs.Screen

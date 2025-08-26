@@ -86,7 +86,7 @@ const http = async <T>(
       response.data.paginate ?? null,
     );
   } catch (error: any) {
-    console.error(error);
+    console.error(error, config);
     return handleError(error);
   }
 };

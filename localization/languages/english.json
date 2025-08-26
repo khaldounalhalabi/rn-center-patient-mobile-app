@@ -1734,7 +1734,8 @@
     "and_items_count": "And {items_count} other items",
     "datepicker": "Pick a date",
     "retry": "Retry",
-    "add_to_calendar": "Add to calendar"
+    "add_to_calendar": "Add to calendar",
+    "doctors": "Doctors"
   },
   "holidays": {
     "from": "From",
@@ -1995,5 +1996,9 @@
     "actions": "Actions",
     "no_files": "There is no files",
     "create_title": "Add scans, medical files or images"
+  },
+  "patient_app": {
+    "book_an_appointment": "Book An Appointment With The Doctor",
+    "doctor_schedule": "Doctor Schedule"
   }
 }

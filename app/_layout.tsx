@@ -1,7 +1,6 @@
 import "@/global.css";
 
 import ProfileButton from "@/components/profile/ProfileButton";
-import LocationTrackingProvider from "@/components/providers/LocationTrackingProvider";
 import NotificationProvider from "@/components/providers/NotificationProvider";
 import UserProvider from "@/components/providers/UserProvider";
 import RightSideHeader from "@/components/RightSideHeader";
@@ -115,21 +114,19 @@ export default function RootLayout() {
           <LanguageProvider>
             <UserProvider>
               <NotificationProvider>
-                <LocationTrackingProvider>
-                  <ThemeProvider
-                    value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}
-                  >
-                    <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-                    <Stack
-                      screenOptions={{
-                        headerShown: true,
-                        headerRight: () => <RightSideHeader />,
-                        headerTitle: "",
-                        headerLeft: () => <ProfileButton />,
-                      }}
-                    />
-                  </ThemeProvider>
-                </LocationTrackingProvider>
+                <ThemeProvider
+                  value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}
+                >
+                  <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+                  <Stack
+                    screenOptions={{
+                      headerShown: true,
+                      headerRight: () => <RightSideHeader />,
+                      headerTitle: "",
+                      headerLeft: () => <ProfileButton />,
+                    }}
+                  />
+                </ThemeProvider>
               </NotificationProvider>
             </UserProvider>
           </LanguageProvider>

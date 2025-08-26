@@ -1730,7 +1730,8 @@
     "and_items_count": "و {items_count} عنصر آخر",
     "datepicker": "اختر تاريخاً",
     "retry": "إعادة المحاولة",
-    "add_to_calendar": "إضافة إلى التقويم"
+    "add_to_calendar": "إضافة إلى التقويم",
+    "doctors": "الأطباء"
   },
   "holidays": {
     "from": "من",
@@ -1991,5 +1992,9 @@
     "actions": "الخيارات",
     "no_files": "لا يوجد ملفات مخزنة",
     "create_title": "إضافة صورة شعاعية"
+  },
+  "patient_app": {
+    "book_an_appointment": "احجز موعد مع الطبيب",
+    "doctor_schedule": "جدول دوام الطبيب"
   }
 }
