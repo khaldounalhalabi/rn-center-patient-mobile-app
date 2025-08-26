@@ -26,6 +26,14 @@ class VacationService extends BaseService<VacationService, Vacation>() {
 
     return this.errorHandler(response);
   }
+
+  public async activeByClinic(clinicId: number) {
+    const response = await GET<Vacation[]>(
+      `/customer/clinics/${clinicId}/vacations`,
+    );
+
+    return this.errorHandler(response);
+  }
 }
 
 export default VacationService;

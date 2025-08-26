@@ -952,7 +952,7 @@
         "update_date": "تعديل التاريخ",
         "clinic_appointment_cost": "كلفة الموعد في العيادة",
         "cancellation_reason": "سبب الإلغاء",
-        "time": "Time"
+        "time": "الوقت"
       },
       "show": {
         "cancellationReason": "سبب الالغاء",

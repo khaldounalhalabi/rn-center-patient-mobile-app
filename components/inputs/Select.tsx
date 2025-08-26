@@ -7,6 +7,7 @@ import {
   Select as ShadcnSelect,
 } from "@/components/ui/select";
 import { useTranslation } from "@/localization";
+import { useEffect, useState } from "react";
 import { Platform, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,6 +27,7 @@ const Select = ({
   onChange?: ((value: string) => void) | undefined;
   translated?: boolean;
 }) => {
+  const [options, setOptions] = useState<any[]>(data);
   const { t } = useTranslation();
   const tEnum = useTranslateEnum();
 
@@ -34,7 +36,7 @@ const Select = ({
   }
 
   let defaultValue: string | undefined | { label?: string; value?: string } =
-    data.filter((i) =>
+    options.filter((i) =>
       isOption(i) ? i.value == selected : i == selected,
     )?.[0] ?? undefined;
 
@@ -57,6 +59,10 @@ const Select = ({
       : translated
         ? tEnum(defaultValue)
         : defaultValue) ?? "";
+
+  useEffect(() => {
+    setOptions(data);
+  }, [data]);
 
   return (
     <View className="w-full flex flex-col gap-3 items-start">
@@ -85,7 +91,7 @@ const Select = ({
         <SelectContent insets={contentInsets} side="top">
           <ScrollView className="max-h-[250px]">
             <SelectGroup>
-              {data.map((item, index) => (
+              {options.map((item, index) => (
                 <SelectItem
                   value={
                     item == "all" ? "" : isOption(item) ? item.value : item

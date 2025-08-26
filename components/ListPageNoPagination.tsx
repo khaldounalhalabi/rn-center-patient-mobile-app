@@ -92,7 +92,7 @@ function useListPageNoPagination<DATAITEM>({
               className="w-full"
               placeholder={t("table.search")}
               onChangeText={(value) => {
-                if (value.trim().length > 0) {
+                if (value?.trim()?.length > 0) {
                   setSearch(value);
                 } else {
                   setSearch(value);
