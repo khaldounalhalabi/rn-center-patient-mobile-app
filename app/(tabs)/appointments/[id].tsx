@@ -81,6 +81,7 @@ const Appointment = () => {
                 label={med.medicine?.name}
                 col
                 className="border my-2 border-primary rounded-md p-3"
+                key={index}
               >
                 <LabelValue
                   label={t("common.prescription.dosage")}
