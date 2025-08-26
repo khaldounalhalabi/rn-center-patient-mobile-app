@@ -9,12 +9,12 @@ class AttendanceLogService extends BaseService<
   AttendanceLog
 >() {
   getBaseUrl(): string {
-    return `${this.role}/attendances`;
+    return `customer/attendances`;
   }
 
   public editOrCreateUserAttendance = async (userId: number, data: any) => {
     const response = await POST<AttendanceLog[]>(
-      `/${this.role}/users/${userId}/attendances`,
+      `/customer/users/${userId}/attendances`,
       data,
       this.headers,
     );
@@ -24,7 +24,7 @@ class AttendanceLogService extends BaseService<
 
   public async mine(year: string, month: number) {
     const response = await GET<UserAttendance>(
-      `/${this.role}/attendances`,
+      `/customer/attendances`,
       {
         year: year,
         month: month,
@@ -37,7 +37,7 @@ class AttendanceLogService extends BaseService<
 
   public async myStat() {
     const response = await GET<AttendanceStats>(
-      `${this.role}/attendances/statistics`,
+      `customer/attendances/statistics`,
     );
 
     return this.errorHandler(response);
@@ -45,21 +45,21 @@ class AttendanceLogService extends BaseService<
 
   public async lastLog() {
     const response = await GET<AttendanceLog | undefined>(
-      `${this.role}/attendances/latest`,
+      `customer/attendances/latest`,
     );
     return this.errorHandler(response);
   }
 
   public async checkin() {
     const response = await GET<AttendanceLog | undefined>(
-      `${this.role}/attendances/checkin`,
+      `customer/attendances/checkin`,
     );
     return this.errorHandler(response);
   }
 
   public async checkout() {
     const response = await GET<AttendanceLog | undefined>(
-      `${this.role}/attendances/checkout`,
+      `customer/attendances/checkout`,
     );
     return this.errorHandler(response);
   }

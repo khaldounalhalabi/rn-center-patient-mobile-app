@@ -1,5 +1,4 @@
 import { AppointmentStatusEnum } from "@/enums/AppointmentStatusEnum";
-import { RoleEnum } from "@/enums/RoleEnum";
 import { GET, POST, PUT } from "@/http/Http";
 import { ApiResponse } from "@/http/Response";
 import { Appointment } from "@/models/Appointment";
@@ -10,17 +9,14 @@ export class AppointmentService extends BaseService<
   Appointment
 >() {
   public getBaseUrl(): string {
-    return `${this.role}/appointments`;
+    return `customer/appointments`;
   }
 
   public async getAvailableTimes(
     clinicId: number,
     date: string,
   ): Promise<ApiResponse<string[]>> {
-    const url =
-      this.role == RoleEnum.DOCTOR
-        ? "doctor/available-appointments-times"
-        : `${this.role}/clinics/available-appointments-times`;
+    const url = `customer/clinics/available-appointments-times`;
     const res = await POST<string[]>(url, { date: date, clinic_id: clinicId });
     return await this.errorHandler(res);
   }
@@ -30,14 +26,11 @@ export class AppointmentService extends BaseService<
     status: AppointmentStatusEnum,
     cancellationReason?: string | undefined,
   ): Promise<ApiResponse<Appointment>> {
-    const res = await PUT<Appointment>(
-      `${this.role}/appointments/change-status`,
-      {
-        status: status,
-        appointment_id: appointmentId,
-        cancellation_reason: cancellationReason,
-      },
-    );
+    const res = await PUT<Appointment>(`customer/appointments/change-status`, {
+      status: status,
+      appointment_id: appointmentId,
+      cancellation_reason: cancellationReason,
+    });
     return await this.errorHandler(res);
   }
 
@@ -51,7 +44,7 @@ export class AppointmentService extends BaseService<
     params?: object,
   ): Promise<ApiResponse<Appointment[]>> {
     const res = await GET<Appointment[]>(
-      `${this.role}/clinics/${clinicId}/appointments`,
+      `customer/clinics/${clinicId}/appointments`,
       {
         page: page,
         search: search,
@@ -75,7 +68,7 @@ export class AppointmentService extends BaseService<
     params?: object,
   ): Promise<ApiResponse<Appointment[]>> {
     const res = await GET<Appointment[]>(
-      `${this.role}/customers/${customerId}/appointments`,
+      `customer/customers/${customerId}/appointments`,
       {
         page: page,
         search: search,

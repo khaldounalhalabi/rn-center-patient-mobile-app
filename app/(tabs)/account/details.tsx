@@ -78,12 +78,10 @@ const Details = () => {
         </Badge>
       </View>
 
-      {user?.customer?.other_data?.map((item) => (
-        <View className="flex flex-row items-center justify-between w-full">
-          <Text> {item.key}</Text>
-          <Badge>
-            <Text>{item.value ?? <TranslatableEnum value="no_data" />}</Text>
-          </Badge>
+      {user?.customer?.other_data?.map((item, index) => (
+        <View className="flex items-start gap-3 justify-between w-full" key={index}>
+          <Text className="font-bold">{item.key}</Text>
+          <Text>{item.value ?? <TranslatableEnum value="no_data" />}</Text>
         </View>
       ))}
 

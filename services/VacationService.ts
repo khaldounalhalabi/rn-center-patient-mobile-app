@@ -4,11 +4,11 @@ import { BaseService } from "./BaseService";
 
 class VacationService extends BaseService<VacationService, Vacation>() {
   public getBaseUrl(): string {
-    return `${this.role}/vacations`;
+    return `customer/vacations`;
   }
 
   public async myActiveVacations() {
-    const response = await GET<Vacation[]>(`/${this.role}/vacations/active`);
+    const response = await GET<Vacation[]>(`/customer/vacations/active`);
 
     return this.errorHandler(response);
   }
@@ -18,7 +18,7 @@ class VacationService extends BaseService<VacationService, Vacation>() {
     search?: string,
     params?: Record<string, any>,
   ) {
-    const response = await GET<Vacation[]>(`/${this.role}/vacations/mine`, {
+    const response = await GET<Vacation[]>(`/customer/vacations/mine`, {
       page: page,
       search: search,
       ...params,

@@ -7,7 +7,7 @@ export class NotificationService extends BaseService<
   DBNotification
 >() {
   public getBaseUrl(): string {
-    return `${this.role}/notifications`;
+    return `customer/notifications`;
   }
 
   public async markAsRead(notificationId: string | number) {

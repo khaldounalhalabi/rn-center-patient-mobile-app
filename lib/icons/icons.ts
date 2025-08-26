@@ -6,6 +6,7 @@ import {
   CalendarClockIcon,
   CalendarIcon,
   CheckCircle,
+  ChevronDown,
   Clock,
   DownloadIcon,
   Languages,
@@ -18,6 +19,7 @@ import {
   Timer,
   TrendingUp,
   User2Icon,
+  X,
 } from "lucide-react-native";
 import { iconWithClassName } from "./IconWithClassName";
 
@@ -40,6 +42,8 @@ iconWithClassName(CalendarIcon);
 iconWithClassName(Languages);
 iconWithClassName(Bell);
 iconWithClassName(CheckCircle);
+iconWithClassName(X);
+iconWithClassName(ChevronDown);
 export {
   AlertCircleIcon,
   Award,
@@ -48,6 +52,7 @@ export {
   CalendarClockIcon,
   CalendarIcon,
   CheckCircle,
+  ChevronDown,
   Clock,
   DownloadIcon,
   Languages,
@@ -60,4 +65,5 @@ export {
   Timer,
   TrendingUp,
   User2Icon,
+  X,
 };

@@ -4,11 +4,11 @@ import { GET } from "@/http/Http";
 
 export class HolidayService extends BaseService<HolidayService, Holiday>() {
   public getBaseUrl(): string {
-    return `${this.role}/holidays`;
+    return `customer/holidays`;
   }
 
   public activeHolidays = async () => {
-    const response = await GET<Holiday[]>(`${this.role}/holidays/active`);
+    const response = await GET<Holiday[]>(`customer/holidays/active`);
     return this.errorHandler(response);
   };
 }

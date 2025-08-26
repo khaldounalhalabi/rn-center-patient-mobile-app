@@ -6,6 +6,6 @@ export class TaskCommentService extends BaseService<
   TaskComment
 >() {
   getBaseUrl(): string {
-    return `/${this.role}/task-comments`;
+    return `/customer/task-comments`;
   }
 }

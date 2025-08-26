@@ -5,7 +5,7 @@ import { BaseService } from "@/services/BaseService";
 
 class TaskService extends BaseService<TaskService, Task>() {
   getBaseUrl(): string {
-    return `/${this.role}/tasks`;
+    return `/customer/tasks`;
   }
 
   public async changeStatus(taskId: number, status: TaskStatusEnum) {

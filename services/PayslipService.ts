@@ -5,7 +5,7 @@ import { BaseService } from "@/services/BaseService";
 
 class PayslipService extends BaseService<PayslipService, Payslip>() {
   getBaseUrl(): string {
-    return `${this.role}/payslips`;
+    return `customer/payslips`;
   }
 
   public async getByPayrun(
@@ -18,7 +18,7 @@ class PayslipService extends BaseService<PayslipService, Payslip>() {
     params?: object,
   ) {
     const response = await GET<Payslip[]>(
-      `${this.role}/payruns/${payrunId}/payslips`,
+      `customer/payruns/${payrunId}/payslips`,
       {
         page: page,
         search: search,
@@ -34,7 +34,7 @@ class PayslipService extends BaseService<PayslipService, Payslip>() {
 
   public async toggleStatus(payslipId: number, status: PayslipStatusEnum) {
     const response = await POST<PayslipStatusEnum>(
-      `/${this.role}/payslips/${payslipId}/toggle-status`,
+      `/customer/payslips/${payslipId}/toggle-status`,
       {
         status: status,
       },
@@ -50,7 +50,7 @@ class PayslipService extends BaseService<PayslipService, Payslip>() {
     per_page?: number,
     params?: object,
   ) {
-    const response = await GET<Payslip[]>(`/${this.role}/payslips`, {
+    const response = await GET<Payslip[]>(`/customer/payslips`, {
       page: page,
       search: search,
       sort_col: sortCol,
