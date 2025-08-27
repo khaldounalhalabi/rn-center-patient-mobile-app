@@ -81,4 +81,11 @@ export class AppointmentService extends BaseService<
     );
     return await this.errorHandler(res);
   }
+
+  public async cancel(appointmentId: number) {
+    const response = await GET<Appointment>(
+      `/customer/appointments/${appointmentId}/cancel`,
+    );
+    return this.errorHandler(response);
+  }
 }

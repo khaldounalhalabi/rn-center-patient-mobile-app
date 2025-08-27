@@ -1,15 +1,20 @@
 import LabelValue, { Label } from "@/components/label-value";
 import LoadingScreen from "@/components/LoadingScreen";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Page from "@/components/page";
 import TranslatableEnum from "@/components/TranslatableEnum";
+import { Button } from "@/components/ui/button";
+import { Text } from "@/components/ui/text";
+import { AppointmentStatusEnum } from "@/enums/AppointmentStatusEnum";
 import { useTranslation } from "@/localization";
 import { AppointmentService } from "@/services/AppointmentService";
-import { useQuery } from "@tanstack/react-query";
-import { useLocalSearchParams } from "expo-router";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 const Appointment = () => {
   const { id } = useLocalSearchParams();
   const { t } = useTranslation();
+  const router = useRouter();
   const appointmentId = id ? parseInt(id as string) : 0;
   const service = AppointmentService.make();
   const { data: appointment, isLoading } = useQuery({
@@ -17,6 +22,13 @@ const Appointment = () => {
     queryFn: async () => await service.show(appointmentId),
     select(data) {
       return data.data;
+    },
+  });
+
+  const cancelMutation = useMutation({
+    mutationFn: async () => service.cancel(appointmentId),
+    onSuccess() {
+      router.back();
     },
   });
 
@@ -105,6 +117,21 @@ const Appointment = () => {
             ))}
           </Label>
         </Label>
+      )}
+
+      {appointment?.status == AppointmentStatusEnum.PENDING && (
+        <Button
+          variant={"destructive"}
+          onPress={() => {
+            cancelMutation.mutate();
+          }}
+          className="flex-1 "
+        >
+          <Text style={{ fontSize: 12 }}>{t("components.cancel")}</Text>
+          {cancelMutation.isPending && (
+            <LoadingSpinner className="text-destructive-foreground" />
+          )}
+        </Button>
       )}
     </Page>
   );
