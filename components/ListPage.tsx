@@ -1,3 +1,4 @@
+import { getNestedPropertyValue } from "@/helpers/helpers";
 import { ApiResponse } from "@/http/Response";
 import { Plus } from "@/lib/icons/icons";
 import { useTranslation } from "@/localization";
@@ -43,7 +44,7 @@ function useListPage<DATAITEM>({
   const [search, setSearch] = useState<undefined | string>(undefined);
 
   const {
-    data: items,
+    data,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -62,10 +63,12 @@ function useListPage<DATAITEM>({
           : null
         : null;
     },
-    select(data) {
-      return data.pages.flatMap((d) => d.data);
-    },
   });
+
+  const items = React.useMemo(
+    () => data?.pages.flatMap((d) => d.data) ?? [],
+    [data],
+  );
 
   const Render = () => {
     if (isError)
@@ -112,6 +115,10 @@ function useListPage<DATAITEM>({
             contentContainerStyle={{ padding: 16 }}
             data={items}
             renderItem={renderItem}
+            keyExtractor={(item, index) => {
+              const id = getNestedPropertyValue(item, "id");
+              return id ? id.toString() : `item-${index}`;
+            }}
             ListEmptyComponent={
               <View className="items-center justify-center py-12">
                 <Text className="text-muted-foreground">
@@ -122,7 +129,7 @@ function useListPage<DATAITEM>({
             onEndReached={() => {
               if (hasNextPage && !isFetchingNextPage) fetchNextPage();
             }}
-            onEndReachedThreshold={0.2}
+            onEndReachedThreshold={0.5}
             ListFooterComponent={
               isFetchingNextPage ? (
                 <View className="items-center my-4">
