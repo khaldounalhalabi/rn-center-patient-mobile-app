@@ -35,17 +35,7 @@ const TabLayout = () => {
             },
           }}
         />
-        
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: t("landing.home"),
-            tabBarIcon: ({ color }) => <HomeIcon color={color} />,
-            tabBarLabelStyle: {
-              fontFamily: locale == "en" ? "kodchasan" : "cairo",
-            },
-          }}
-        />
+
         <Tabs.Screen
           name="appointments"
           options={{
@@ -63,6 +53,17 @@ const TabLayout = () => {
           options={{
             title: t("components.doctors"),
             tabBarIcon: ({ color }) => <CrossIcon color={color} />,
+            tabBarLabelStyle: {
+              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+            },
+          }}
+        />
+
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: t("landing.home"),
+            tabBarIcon: ({ color }) => <HomeIcon color={color} />,
             tabBarLabelStyle: {
               fontFamily: locale == "en" ? "kodchasan" : "cairo",
             },

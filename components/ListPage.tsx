@@ -102,6 +102,7 @@ function useListPage<DATAITEM>({
                 setSearch(e.nativeEvent.text);
               }}
               returnKeyType="search"
+              defaultValue={search}
             />
           )}
         </View>
