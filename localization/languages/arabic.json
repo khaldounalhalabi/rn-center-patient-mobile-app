@@ -959,7 +959,7 @@
         "appointmentDetails": "تفاصيل الحجز",
         "editBtn": "تعديل",
         "clinicName": "اسم العيادة",
-        "doctorName": "اسم الدكتور",
+        "doctorName": "اسم الطبيب",
         "customerName": "اسم المريض",
         "serviceName": "اسم الخدمة",
         "overview": "نظرة عامة",
@@ -1089,7 +1089,7 @@
     "prescription": {
       "table": {
         "clinicName": "اسم العيادة",
-        "doctorName": "اسم الدكتور",
+        "doctorName": "اسم الطبيب",
         "patientName": "اسم المريض",
         "nextVisit": "الزيارة التالية",
         "actions": "الخيارات",
