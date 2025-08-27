@@ -8,6 +8,7 @@ import {
   CrossIcon,
   HomeIcon,
   Stethoscope,
+  TentTree,
 } from "lucide-react-native";
 import React from "react";
 
@@ -24,6 +25,17 @@ const TabLayout = () => {
           animation: "shift",
         }}
       >
+        <Tabs.Screen
+          name="holidays"
+          options={{
+            title: t("holidays.holidays"),
+            tabBarIcon: ({ color }) => <TentTree color={color} />,
+            tabBarLabelStyle: {
+              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+            },
+          }}
+        />
+        
         <Tabs.Screen
           name="index"
           options={{

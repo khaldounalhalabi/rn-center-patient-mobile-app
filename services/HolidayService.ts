@@ -1,10 +1,10 @@
-import { BaseService } from "@/services/BaseService";
-import { Holiday } from "@/models/Holiday";
 import { GET } from "@/http/Http";
+import { Holiday } from "@/models/Holiday";
+import { BaseService } from "@/services/BaseService";
 
 export class HolidayService extends BaseService<HolidayService, Holiday>() {
   public getBaseUrl(): string {
-    return `customer/holidays`;
+    return `/holidays`;
   }
 
   public activeHolidays = async () => {
