@@ -85,6 +85,7 @@ export class NotificationPayload {
     const type = this.type;
     switch (type) {
       case NotificationsTypeEnum.AppointmentEvent:
+      case NotificationsTypeEnum.AppointmentRemainingTime:
         if (this.getData("event") != "DELETED") {
           return {
             pathname: "/appointments/[id]",
@@ -96,28 +97,6 @@ export class NotificationPayload {
           return "/appointments";
         }
 
-      case NotificationsTypeEnum.NewPayrunAdded:
-        return `/payslips`;
-      case NotificationsTypeEnum.PayslipUpdated:
-        return {
-          pathname: "/payslips/[id]",
-          params: {
-            id: this.getData("payslip_id"),
-          },
-        };
-      case NotificationsTypeEnum.NewVacationAdded:
-        return `/vacations`;
-      case NotificationsTypeEnum.VacationStatusChanged:
-        return `/vacations`;
-      case NotificationsTypeEnum.VacationUpdated:
-        return `/vacations`;
-      case NotificationsTypeEnum.NewTaskComment:
-        return `/tasks`;
-      case NotificationsTypeEnum.TaskStatusChanged:
-        return `/tasks`;
-      case NotificationsTypeEnum.NewTaskAssigned:
-        return `/tasks`;
-
       default:
         return "/";
     }
@@ -128,21 +107,8 @@ export enum NotificationsTypeEnum {
   // Common
   AppointmentEvent = "Common\\AppointmentEventNotification",
 
-  NewVacationAdded = "Common\\NewVacationAddedNotification",
-  VacationStatusChanged = "Common\\VacationStatusChangedNotification",
-  VacationUpdated = "Common\\VacationUpdatedNotification",
-
-  NewPayrunAdded = "Common\\NewPayrunAddedNotification",
-  PayslipUpdated = "Common\\PayslipUpdatedNotification",
-
-  NewTaskComment = "Common\\NewCommentOnTaskNotification",
-  TaskStatusChanged = "Common\\TaskStatusChangedNotification",
-
-  //Secretary
-  NewTaskAssigned = "Secretary\\NewTaskAssignedNotification",
+  // Customer
+  AppointmentRemainingTime = "Customer\\AppointmentRemainingTime",
 }
 
-export enum RealTimeEventsTypeEnum {
-  AttendanceEdited = "Realtime\\AttendanceEditedNotification",
-  PayrunStatusChanged = "Realtime\\PayrunStatusChangedNotification",
-}
+export enum RealTimeEventsTypeEnum {}

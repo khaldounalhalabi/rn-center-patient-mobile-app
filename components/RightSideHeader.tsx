@@ -1,6 +1,7 @@
 import useUser from "@/hooks/UserHook";
 import { LanguageToggleButton } from "./LanguageToggleButton";
 import { ThemeToggle } from "./ui/ThemeToggleButton";
+import NotificationsButton from "./NotificationsButton";
 
 const RightSideHeader = () => {
   const { user } = useUser();
@@ -8,7 +9,7 @@ const RightSideHeader = () => {
     <>
       <ThemeToggle />
       <LanguageToggleButton />
-      {/* {user && <NotificationsButton />} */}
+      {user && <NotificationsButton />}
     </>
   );
 };

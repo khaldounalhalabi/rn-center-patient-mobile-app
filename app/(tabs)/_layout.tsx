@@ -44,7 +44,7 @@ const TabLayout = () => {
             tabBarLabelStyle: {
               fontFamily: locale == "en" ? "kodchasan" : "cairo",
             },
-            href: user ? { pathname: "/appointments" } : null,
+            href: null,
           }}
         />
 
@@ -95,6 +95,13 @@ const TabLayout = () => {
           name="account"
           options={{
             title: "Account",
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="notifications"
+          options={{
+            title: "Notifications",
             href: null,
           }}
         />
