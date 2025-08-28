@@ -15,5 +15,6 @@ interface MedicalRecord {
 
   customer?: Customer;
   clinic?: Clinic;
+  created_at: string;
 }
 export default MedicalRecord;

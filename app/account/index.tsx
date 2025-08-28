@@ -1,6 +1,12 @@
 import { Text } from "@/components/ui/text";
 import useUser from "@/hooks/UserHook";
-import { BookCheck, Calendar, PowerOff, User2Icon } from "@/lib/icons/icons";
+import {
+  Archive,
+  BookCheck,
+  Calendar,
+  PowerOff,
+  User2Icon,
+} from "@/lib/icons/icons";
 import { useTranslation } from "@/localization";
 import { AuthService } from "@/services/AuthService";
 import { useRouter } from "expo-router";
@@ -52,6 +58,17 @@ const Index = () => {
             <View className="w-full flex flex-row items-center justify-between p-5 border-b border-b-secondary">
               <Text>{t("links.prescriptions")}</Text>
               <BookCheck className="text-primary" />
+            </View>
+          </Pressable>
+          <Pressable
+            className="w-full"
+            onPress={() => {
+              router.push("/medical-records");
+            }}
+          >
+            <View className="w-full flex flex-row items-center justify-between p-5 border-b border-b-secondary">
+              <Text>{t("medical_records.index_title")}</Text>
+              <Archive className="text-primary" />
             </View>
           </Pressable>
           <Pressable className="w-full" onPress={logout}>

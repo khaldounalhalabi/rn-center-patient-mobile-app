@@ -1,5 +1,6 @@
 import {
   AlertCircleIcon,
+  Archive,
   Award,
   Bell,
   BookCheck,
@@ -46,8 +47,11 @@ iconWithClassName(CheckCircle);
 iconWithClassName(X);
 iconWithClassName(ChevronDown);
 iconWithClassName(BookCheck);
+iconWithClassName(Archive);
+
 export {
   AlertCircleIcon,
+  Archive,
   Award,
   Bell,
   BookCheck,
