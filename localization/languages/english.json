@@ -1735,7 +1735,14 @@
     "datepicker": "Pick a date",
     "retry": "Retry",
     "add_to_calendar": "Add to calendar",
-    "doctors": "Doctors"
+    "doctors": "Doctors",
+    "download_complete": "Download Complete",
+    "file_saved_to_device": "{{filename}} has been saved to your device",
+    "permission_required": "Permission Required",
+    "storage_permission_message": "Please grant storage permission to save files to your device.",
+    "download_failed": "Download failed",
+    "unknown_error": "Unknown error occurred",
+    "open_file": "Open File"
   },
   "holidays": {
     "from": "From",

@@ -22,7 +22,9 @@
         "android.permission.WRITE_CALENDAR",
         "android.permission.POST_NOTIFICATIONS",
         "android.permission.RECEIVE_BOOT_COMPLETED",
-        "android.permission.VIBRATE"
+        "android.permission.VIBRATE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
       ]
     },
     "web": {
@@ -50,6 +52,7 @@
         }
       ],
       "expo-notifications",
+      "expo-media-library",
       "@react-native-firebase/app",
       "@react-native-firebase/messaging",
       [
