@@ -1,5 +1,4 @@
 import { useTranslateEnum } from "@/components/TranslatableEnum";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import React, { ReactNode } from "react";
 import { TextProps, View, ViewProps } from "react-native";
@@ -29,7 +28,9 @@ const LabelValue = ({
         {label} {!separated ? ": " : ""}
       </Text>
       <View>
-        <Text className="font-thin">{value}</Text>
+        <Text className="font-thin">
+          <Value value={value} />
+        </Text>
       </View>
     </View>
   );
@@ -82,39 +83,25 @@ export const Value: React.FC<ValueProps> = ({
   let showedValue = value;
   const tEnum = useTranslateEnum();
   if (value === undefined || value === null) {
-    showedValue = (
-      <Badge>
-        <Text>{tEnum("no_data")}</Text>
-      </Badge>
-    );
+    showedValue = tEnum("no_data");
   } else if (value === 0 || Number.isNaN(value)) {
     showedValue = 0;
   } else if (value === false) {
     showedValue = "false";
   } else if (value === "") {
-    showedValue = (
-      <Badge>
-        <Text>{tEnum("no_data")}</Text>
-      </Badge>
-    );
+    showedValue = tEnum("no_data");
   } else if (
     typeof value == "string" &&
     (value?.includes("undefined") || value?.includes("null"))
   ) {
-    showedValue = (
-      <Badge>
-        <Text>{tEnum("no_data")}</Text>
-      </Badge>
-    );
+    showedValue = tEnum("no_data");
   } else if (typeof value == "string" && value.includes("NaN")) {
     showedValue = 0;
   }
 
   return (
     <Text
-      className={
-        className ?? `text-start text-xs font-normal md:text-base`
-      }
+      className={className ?? `text-start text-xs font-normal md:text-base`}
       {...props}
     >
       {!children ? showedValue : children}

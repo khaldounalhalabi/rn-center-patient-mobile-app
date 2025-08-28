@@ -2,6 +2,7 @@ import {
   AlertCircleIcon,
   Award,
   Bell,
+  BookCheck,
   Calendar,
   CalendarClockIcon,
   CalendarIcon,
@@ -44,10 +45,12 @@ iconWithClassName(Bell);
 iconWithClassName(CheckCircle);
 iconWithClassName(X);
 iconWithClassName(ChevronDown);
+iconWithClassName(BookCheck);
 export {
   AlertCircleIcon,
   Award,
   Bell,
+  BookCheck,
   Calendar,
   CalendarClockIcon,
   CalendarIcon,

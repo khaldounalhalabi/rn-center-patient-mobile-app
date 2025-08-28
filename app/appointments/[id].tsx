@@ -1,7 +1,8 @@
-import LabelValue, { Label } from "@/components/label-value";
+import LabelValue from "@/components/label-value";
 import LoadingScreen from "@/components/LoadingScreen";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Page from "@/components/page";
+import PrescriptionDetails from "@/components/prescriptions/PrescriptionDetails";
 import TranslatableEnum from "@/components/TranslatableEnum";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
@@ -67,57 +68,7 @@ const Appointment = () => {
         col
       />
 
-      {appointment?.prescription && (
-        <Label
-          label={t("common.patient.show.prescriptions") + " :"}
-          className="gap-3 font-extrabold"
-          col
-        >
-          <LabelValue
-            label={t("common.prescription.next_visit")}
-            value={appointment?.prescription?.next_visit}
-          />
-
-          <LabelValue
-            label={t("common.prescription.prescribed_at")}
-            value={appointment?.prescription?.created_at}
-          />
-
-          {appointment?.prescription?.other_data?.map((item, index) => (
-            <LabelValue key={index} label={item.key} value={item.value} col />
-          ))}
-
-          <Label label={t("links.medicines")} col>
-            {appointment?.prescription?.medicines?.map((med, index) => (
-              <Label
-                label={med.medicine?.name}
-                col
-                className="border my-2 border-primary rounded-md p-3"
-                key={index}
-              >
-                <LabelValue
-                  label={t("common.prescription.dosage")}
-                  value={med.dosage}
-                />
-                <LabelValue
-                  label={t("common.prescription.dosage_interval")}
-                  value={med.dose_interval}
-                />
-
-                <LabelValue
-                  label={t("tasks.user_comment")}
-                  value={med.comment}
-                />
-
-                <LabelValue
-                  label={t("tasks.status")}
-                  value={<TranslatableEnum value={med.status} />}
-                />
-              </Label>
-            ))}
-          </Label>
-        </Label>
-      )}
+      <PrescriptionDetails prescription={appointment?.prescription} />
 
       {appointment?.status == AppointmentStatusEnum.PENDING && (
         <Button
