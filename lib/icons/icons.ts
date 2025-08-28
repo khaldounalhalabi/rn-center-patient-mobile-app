@@ -11,6 +11,7 @@ import {
   ChevronDown,
   Clock,
   DownloadIcon,
+  FileStack,
   Languages,
   Loader2,
   Plus,
@@ -48,6 +49,7 @@ iconWithClassName(X);
 iconWithClassName(ChevronDown);
 iconWithClassName(BookCheck);
 iconWithClassName(Archive);
+iconWithClassName(FileStack)
 
 export {
   AlertCircleIcon,
@@ -73,4 +75,5 @@ export {
   TrendingUp,
   User2Icon,
   X,
+  FileStack
 };
