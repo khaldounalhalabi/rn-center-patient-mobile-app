@@ -2,7 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import useUser from "@/hooks/UserHook";
-import { LogIn, Stethoscope, UserPlus } from "@/lib/icons/icons";
+import {
+  Bell,
+  Building2,
+  Calendar,
+  Clock,
+  FileText,
+  LogIn,
+  Paperclip,
+  Pill,
+  Stethoscope,
+  UserPlus,
+} from "@/lib/icons/icons";
 import { useTranslation } from "@/localization";
 import { NotificationPayload } from "@/models/NotificationPayload";
 import { AppointmentService } from "@/services/AppointmentService";
@@ -12,15 +23,6 @@ import { NotificationService } from "@/services/NotificationService";
 import { PrescriptionService } from "@/services/PrescriptionsServise";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
-import {
-  Bell,
-  Building2,
-  Calendar,
-  Clock,
-  FileText,
-  Paperclip,
-  Pill,
-} from "lucide-react-native";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -404,9 +406,12 @@ const HomeScreen = () => {
                 <Button
                   variant="secondary"
                   onPress={() => router.push("/(auth)/register")}
-                  className="flex-row items-center gap-2 justify-center"
+                  className="flex-row items-center gap-2 justify-center mt-2"
                 >
-                  <UserPlus size={20} className="mr-2" />
+                  <UserPlus
+                    size={20}
+                    className="mr-2 text-secondary-foreground"
+                  />
                   <Text>{t("auth.sign_up")}</Text>
                 </Button>
               </View>
@@ -423,7 +428,7 @@ const HomeScreen = () => {
                   onPress={() => router.push("/(tabs)/clinics")}
                   className="flex-row items-center mr-2 mb-2"
                 >
-                  <Stethoscope size={16} className="mr-1" />
+                  <Stethoscope size={16} className="mr-1 text-primary" />
                   <Text>{t("sideBar.clinics")}</Text>
                 </Button>
 
@@ -432,7 +437,7 @@ const HomeScreen = () => {
                   onPress={() => router.push("/(tabs)/specialities")}
                   className="flex-row items-center mr-2 mb-2"
                 >
-                  <Clock size={16} className="mr-1" />
+                  <Clock size={16} className="mr-1 text-primary" />
                   <Text>{t("landing.specialities")}</Text>
                 </Button>
 
@@ -441,7 +446,7 @@ const HomeScreen = () => {
                   onPress={() => router.push("/(tabs)/services")}
                   className="flex-row items-center mr-2 mb-2"
                 >
-                  <Building2 size={16} className="mr-1" />
+                  <Building2 size={16} className="mr-1 text-primary" />
                   <Text>{t("sideBar.services")}</Text>
                 </Button>
               </View>

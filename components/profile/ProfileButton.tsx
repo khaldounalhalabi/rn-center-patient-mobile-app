@@ -1,5 +1,5 @@
 import useUser from "@/hooks/UserHook";
-import { useTranslation } from "@/localization";
+import { i18n, useTranslation } from "@/localization";
 import { usePathname, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 import { Avatar, AvatarFallback } from "../ui/avatar";
@@ -21,6 +21,7 @@ const ProfileButton = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const pathname = usePathname();
+  const locale = i18n.locale;
 
   return user ? (
     <Pressable
@@ -52,6 +53,7 @@ const ProfileButton = () => {
         className="text-xs"
         style={{
           fontSize: 12,
+          fontFamily: locale == "en" ? "kodchasan" : "cairo",
         }}
       >
         {authPages.includes(pathname) ? t("landing.home") : t("auth.Login")}

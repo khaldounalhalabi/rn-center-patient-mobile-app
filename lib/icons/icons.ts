@@ -4,6 +4,7 @@ import {
   Award,
   Bell,
   BookCheck,
+  Building2,
   Calendar,
   CalendarClockIcon,
   CalendarIcon,
@@ -12,9 +13,12 @@ import {
   Clock,
   DownloadIcon,
   FileStack,
+  FileText,
   Languages,
   Loader2,
   LogIn,
+  Paperclip,
+  Pill,
   Plus,
   PowerOff,
   Settings,
@@ -56,13 +60,17 @@ iconWithClassName(FileStack);
 iconWithClassName(LogIn);
 iconWithClassName(Stethoscope);
 iconWithClassName(UserPlus);
-
+iconWithClassName(Building2);
+iconWithClassName(FileText);
+iconWithClassName(Paperclip);
+iconWithClassName(Pill);
 export {
   AlertCircleIcon,
   Archive,
   Award,
   Bell,
   BookCheck,
+  Building2,
   Calendar,
   CalendarClockIcon,
   CalendarIcon,
@@ -71,9 +79,12 @@ export {
   Clock,
   DownloadIcon,
   FileStack,
+  FileText,
   Languages,
   Loader2,
   LogIn,
+  Paperclip,
+  Pill,
   Plus,
   PowerOff,
   Settings,

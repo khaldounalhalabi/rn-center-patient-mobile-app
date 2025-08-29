@@ -9,6 +9,7 @@ const TextClassContext = React.createContext<string | undefined>(undefined);
 function Text({
   className,
   asChild = false,
+  style,
   ...props
 }: React.ComponentProps<typeof RNText> & {
   ref?: React.RefObject<RNText>;
@@ -24,9 +25,12 @@ function Text({
         textClass,
         className,
       )}
-      style={{
-        fontFamily: locale == "en" ? "kodchasan" : "cairo",
-      }}
+      style={[
+        {
+          fontFamily: locale == "en" ? "kodchasan" : "cairo",
+        },
+        style,
+      ]}
       {...props}
     />
   );
