@@ -72,7 +72,7 @@ export default function useFileDownload() {
 
       const fullUrl = url.startsWith("http")
         ? url
-        : `${BASE_URL}${url.replace(/^\//, "")}`;
+        : `${BASE_URL}/${url.replace(/^\//, "")}`;        
 
       // Download to app's document directory first
       const tempFileUri = FileSystem.documentDirectory + filename;

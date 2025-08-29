@@ -2010,6 +2010,7 @@
   },
   "patient_app": {
     "book_an_appointment": "Book An Appointment With The Doctor",
-    "doctor_schedule": "Doctor Schedule"
+    "doctor_schedule": "Doctor Schedule",
+    "download_pdf_report": "Download My Medical Report"
   }
 }

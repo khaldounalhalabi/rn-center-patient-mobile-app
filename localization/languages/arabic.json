@@ -2006,6 +2006,7 @@
   },
   "patient_app": {
     "book_an_appointment": "احجز موعد مع الطبيب",
-    "doctor_schedule": "جدول دوام الطبيب"
+    "doctor_schedule": "جدول دوام الطبيب",
+    "download_pdf_report": "تحميل ملفي الطبي"
   }
 }

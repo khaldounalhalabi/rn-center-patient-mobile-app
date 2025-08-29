@@ -1,9 +1,13 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
+import useFileDownload from "@/hooks/useFileDownload";
 import useUser from "@/hooks/UserHook";
 import {
   Archive,
   BookCheck,
   Calendar,
+  DownloadIcon,
   FileStack,
   PowerOff,
   User2Icon,
@@ -23,6 +27,8 @@ const Index = () => {
     setUser(undefined);
     await service.logout();
   };
+  const { downloadFile, isDownloading } = useFileDownload();
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -89,6 +95,26 @@ const Index = () => {
               <PowerOff className="text-primary" />
             </View>
           </Pressable>
+
+          <Button
+            className="my-5 flex flex-row gap-3"
+            onPress={() => {
+              downloadFile(
+                "customer/me/to-pdf",
+                "Medical Report.pdf",
+                "application/pdf",
+              );
+            }}
+          >
+            <Text style={{ fontSize: 12 }}>
+              {t("patient_app.download_pdf_report")}
+            </Text>
+            {isDownloading ? (
+              <LoadingSpinner className="text-primary-foreground" />
+            ) : (
+              <DownloadIcon className="text-primary-foreground" />
+            )}
+          </Button>
         </View>
       </ScrollView>
     </SafeAreaView>
