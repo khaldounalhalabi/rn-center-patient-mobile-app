@@ -41,9 +41,11 @@ const ProfileButton = () => {
     <Button
       variant={"outline"}
       onPress={() => {
-        authPages.includes(pathname)
-          ? router.replace("/")
-          : router.replace("/login");
+        if (authPages.includes(pathname)) {
+          router.replace("/");
+        } else {
+          router.replace("/login");
+        }
       }}
     >
       <Text

@@ -19,6 +19,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -42,72 +43,73 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
   const [handlers, setHandlers] = useState<NotificationHandler[]>([]);
   const { user } = useUser();
   const queryClient = useQueryClient();
-
-  const handleMessage = async (payload: RemoteMessage) => {
-    const notification = new NotificationPayload(payload?.data ?? {});
-    handlers.forEach((handler) => {
-      handler.fn(notification);
-    });
-
-    if (!notification.isNotification()) return;
-
-    await queryClient.invalidateQueries({
-      queryKey: ["app_notifications"],
-    });
-
-    await queryClient.invalidateQueries({
-      queryKey: ["unread_notifications_count"],
-    });
-
-    // Use Expo notification to display
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: notification.title,
-        body: notification.message,
-        data: payload.data,
-      },
-      trigger: null,
-    });
-  };
+  const service = NotificationService.make();
 
   const messaging = getMessaging();
-  useEffect(() => {
-    // Foreground
 
-    return onMessage(messaging, (message) => {
-      handleMessage(message);
-    });
-  }, [handlers, fcmToken, user]);
+  const handleMessage = useCallback(
+    async (payload: RemoteMessage) => {
+      const notification = new NotificationPayload(payload?.data ?? {});
+      if (handlers && handlers.length > 0) {
+        handlers.forEach((handler) => {
+          handler.fn(notification);
+        });
+      }
 
-  setBackgroundMessageHandler(messaging, async (remoteMessage) => {
-    const notification = new NotificationPayload(remoteMessage?.data ?? {});
-    handlers.forEach((handler) => {
-      handler.fn(notification);
-    });
-    const notificationsCount = (await NotificationService.make().unreadCount())
-      .data.unread_count;
-    await Notifications.setBadgeCountAsync(notificationsCount ?? 0);
+      if (!notification.isNotification()) return;
 
-    // Only schedule notification if it's not a file download notification
-    if (
-      !remoteMessage?.data?.type ||
-      remoteMessage.data.type !== "file_download"
-    ) {
+      await queryClient.invalidateQueries({
+        queryKey: ["app_notifications"],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["unread_notifications_count"],
+      });
+
+      // Use Expo notification to display
       await Notifications.scheduleNotificationAsync({
         content: {
           title: notification.title,
           body: notification.message,
-          data: remoteMessage.data,
+          data: payload.data,
         },
         trigger: null,
       });
-    }
-  });
+    },
+    [handlers, queryClient],
+  );
+
+  // Set background message handler in useEffect to avoid conditional hooks
+  useEffect(() => {
+    setBackgroundMessageHandler(messaging, async (remoteMessage) => {
+      const notification = new NotificationPayload(remoteMessage?.data ?? {});
+      if (handlers && handlers.length > 0) {
+        handlers.forEach((handler) => {
+          handler.fn(notification);
+        });
+      }
+      const notificationsCount =
+        (await service.unreadCount())?.data?.unread_count ?? 0;
+      await Notifications.setBadgeCountAsync(notificationsCount ?? 0);
+
+      // Only schedule notification if it's not a file download notification
+      if (
+        !remoteMessage?.data?.type ||
+        remoteMessage.data.type !== "file_download"
+      ) {
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: notification.title,
+            body: notification.message,
+            data: remoteMessage.data,
+          },
+          trigger: null,
+        });
+      }
+    });
+  }, [messaging, handlers, service]);
 
   useEffect(() => {
-    // Background
-
-    // Taps (foreground/background/closed)
     const tapSubscription =
       Notifications.addNotificationResponseReceivedListener(
         async (response) => {
@@ -136,7 +138,6 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
                 });
               }
             } catch (error) {
-              console.error("Failed to open file from notification:", error);
               // Fallback to regular notification handling
               const notification = new NotificationPayload(data);
               router.push(notification.getUrl() as any);
@@ -149,7 +150,6 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
         },
       );
 
-    // Handle if app opened from closed state
     (async () => {
       const response = await Notifications.getLastNotificationResponseAsync();
       if (response) {
@@ -178,7 +178,6 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
               });
             }
           } catch (error) {
-            console.error("Failed to open file from notification:", error);
             // Fallback to regular notification handling
             const notification = new NotificationPayload(data);
             router.push(notification.getUrl() as any);
@@ -195,6 +194,12 @@ const NotificationProvider = ({ children }: { children?: ReactNode }) => {
       tapSubscription.remove();
     };
   }, [router]);
+
+  useEffect(() => {
+    return onMessage(messaging, (message) => {
+      handleMessage(message);
+    });
+  }, [handlers, fcmToken, user, handleMessage, messaging]);
 
   return (
     <NotificationsHandlersContext.Provider value={setHandlers}>

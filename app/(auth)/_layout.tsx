@@ -9,7 +9,7 @@ export default function AuthLayout() {
     if (user && user.phone_verified_at) {
       router.replace("/");
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <Slot

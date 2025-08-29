@@ -70,7 +70,7 @@ const Appointment = () => {
 
       <PrescriptionDetails prescription={appointment?.prescription} />
 
-      {appointment?.status == AppointmentStatusEnum.PENDING && (
+      {appointment?.status === AppointmentStatusEnum.PENDING && (
         <Button
           variant={"destructive"}
           onPress={() => {

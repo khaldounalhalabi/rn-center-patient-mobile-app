@@ -14,6 +14,7 @@ import {
   FileStack,
   Languages,
   Loader2,
+  LogIn,
   Plus,
   PowerOff,
   Settings,
@@ -22,6 +23,7 @@ import {
   Timer,
   TrendingUp,
   User2Icon,
+  UserPlus,
   X,
 } from "lucide-react-native";
 import { iconWithClassName } from "./IconWithClassName";
@@ -49,7 +51,9 @@ iconWithClassName(X);
 iconWithClassName(ChevronDown);
 iconWithClassName(BookCheck);
 iconWithClassName(Archive);
-iconWithClassName(FileStack)
+iconWithClassName(FileStack);
+iconWithClassName(LogIn);
+iconWithClassName(UserPlus);
 
 export {
   AlertCircleIcon,
@@ -64,8 +68,10 @@ export {
   ChevronDown,
   Clock,
   DownloadIcon,
+  FileStack,
   Languages,
   Loader2,
+  LogIn,
   Plus,
   PowerOff,
   Settings,
@@ -74,6 +80,6 @@ export {
   Timer,
   TrendingUp,
   User2Icon,
+  UserPlus,
   X,
-  FileStack
 };

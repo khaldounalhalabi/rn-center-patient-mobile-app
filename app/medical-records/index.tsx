@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
-import { useTranslation } from "@/localization";
 import MedicalRecordService from "@/services/MedicalRecordService";
 import { useRouter } from "expo-router";
 import { Pressable, View } from "react-native";
@@ -14,7 +13,6 @@ import { Pressable, View } from "react-native";
 const MedicalRecords = () => {
   const service = MedicalRecordService.make();
   const router = useRouter();
-  const { t } = useTranslation();
   const { Render } = useListPage({
     api(page, search, params) {
       return service.indexWithPagination(

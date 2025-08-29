@@ -49,6 +49,7 @@
     "expo-linking": "~7.1.4",
     "expo-localization": "~16.1.6",
     "expo-location": "~18.1.6",
+    "expo-media-library": "~17.1.7",
     "expo-modules-core": "~2.5.0",
     "expo-network": "~7.1.5",
     "expo-notifications": "~0.31.4",
@@ -85,16 +86,17 @@
     "react-native-webview": "13.13.5",
     "react-native-worklets-core": "^1.6.0",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^3.4.17",
-    "expo-media-library": "~17.1.7"
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@react-native-community/cli": "latest",
     "@types/react": "~19.0.10",
     "@types/react-native": "^0.72.8",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "3.6.2",
     "typescript": "~5.8.3"
   },

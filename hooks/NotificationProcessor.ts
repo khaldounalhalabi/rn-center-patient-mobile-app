@@ -19,8 +19,8 @@ const useNotificationProcessor = (
 
     const filterHandlers = (handlers: NotificationHandler[]) => {
       if (
-        handlers?.filter((handler) => handler.key == key && handler.is_active)
-          ?.length > 0
+        (handlers?.filter((handler) => handler.key == key && handler.is_active)
+          ?.length ?? 0) > 0
       ) {
         return handlers;
       }

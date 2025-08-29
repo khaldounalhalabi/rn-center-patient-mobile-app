@@ -48,7 +48,7 @@ const Edit = () => {
     return await service.updateUserDetails(data).then((res) => {
       if (res.ok()) {
         setUser(res.data.user);
-        if (storedUser?.phone != res.data?.user?.phone) {
+        if (storedUser?.phone !== res.data?.user?.phone) {
           service.logout().then(() => {
             router.replace("/verify-phone");
           });

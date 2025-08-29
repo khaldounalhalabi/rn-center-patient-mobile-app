@@ -55,7 +55,6 @@ const AttachmentItem = ({ item }: { item: Media }) => {
 
 const Attachments = () => {
   const service = AttachmentService.make();
-  const { t } = useTranslation();
   const { Render } = useListPage({
     api(page, search, params) {
       return service.indexWithPagination(

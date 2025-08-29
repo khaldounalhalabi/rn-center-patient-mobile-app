@@ -1,5 +1,4 @@
 import AuthProvider from "@/components/providers/AuthProvider";
-import useUser from "@/hooks/UserHook";
 import { i18n, useTranslation } from "@/localization";
 import { Tabs } from "expo-router";
 import {
@@ -14,7 +13,6 @@ import React from "react";
 const TabLayout = () => {
   const { t } = useTranslation();
   const locale = i18n.locale;
-  const { user } = useUser();
 
   return (
     <AuthProvider>
@@ -30,7 +28,7 @@ const TabLayout = () => {
             title: t("holidays.holidays"),
             tabBarIcon: ({ color }) => <TentTree color={color} />,
             tabBarLabelStyle: {
-              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+              fontFamily: locale === "en" ? "kodchasan" : "cairo",
             },
           }}
         />
@@ -41,7 +39,7 @@ const TabLayout = () => {
             title: t("components.doctors"),
             tabBarIcon: ({ color }) => <CrossIcon color={color} />,
             tabBarLabelStyle: {
-              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+              fontFamily: locale === "en" ? "kodchasan" : "cairo",
             },
           }}
         />
@@ -52,7 +50,7 @@ const TabLayout = () => {
             title: t("landing.home"),
             tabBarIcon: ({ color }) => <HomeIcon color={color} />,
             tabBarLabelStyle: {
-              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+              fontFamily: locale === "en" ? "kodchasan" : "cairo",
             },
           }}
         />
@@ -63,7 +61,7 @@ const TabLayout = () => {
             title: t("landing.specialities"),
             tabBarIcon: ({ color }) => <Stethoscope color={color} />,
             tabBarLabelStyle: {
-              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+              fontFamily: locale === "en" ? "kodchasan" : "cairo",
             },
           }}
         />
@@ -74,7 +72,7 @@ const TabLayout = () => {
             title: t("sideBar.services"),
             tabBarIcon: ({ color }) => <Ambulance color={color} />,
             tabBarLabelStyle: {
-              fontFamily: locale == "en" ? "kodchasan" : "cairo",
+              fontFamily: locale === "en" ? "kodchasan" : "cairo",
             },
           }}
         />

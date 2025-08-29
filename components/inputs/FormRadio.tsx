@@ -61,7 +61,7 @@ const FormRadio: React.FC<RadioProps> = ({
         }
       }
     });
-  }, [defaultValue, name, setValue]);
+  }, [defaultValue, name, setValue, defaultChecked, options]);
   return (
     <View className="flex flex-col gap-2">
       <Label>{label}</Label>

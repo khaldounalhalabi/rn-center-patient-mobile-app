@@ -72,7 +72,7 @@ const Select = ({
           value:
             (isOption(defaultValue) ? defaultValue?.value : defaultValue) ?? "",
           label:
-            defaultLabel.length > 0
+            (defaultLabel?.length ?? 0) > 0
               ? defaultLabel
               : t("components.select_item"),
         }}

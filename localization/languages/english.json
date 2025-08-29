@@ -1742,7 +1742,11 @@
     "storage_permission_message": "Please grant storage permission to save files to your device.",
     "download_failed": "Download failed",
     "unknown_error": "Unknown error occurred",
-    "open_file": "Open File"
+    "open_file": "Open File",
+    "quick_actions": "Quick Actions",
+    "recent_activity": "Recent Activity",
+    "no_notifications": "No notifications",
+    "attachments": "Attachments"
   },
   "holidays": {
     "from": "From",

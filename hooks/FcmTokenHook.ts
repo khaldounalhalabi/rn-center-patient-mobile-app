@@ -14,11 +14,11 @@ function useFcmToken() {
   const [token, setToken] = useState("");
   const { user } = useUser();
 
-  if (!Device.isDevice || !user) {
-    return "";
-  }
-
   const getToken = async () => {
+    if (!Device.isDevice || !user) {
+      return;
+    }
+
     if (Platform.OS == "android") {
       await Notifications.setNotificationChannelAsync("default", {
         name: "default",
@@ -37,7 +37,7 @@ function useFcmToken() {
       });
       setToken(currentToken);
     } catch (error: unknown) {
-      throw new Error(`${error}`);
+      console.error("Error getting FCM token:", error);
     }
   };
 
@@ -45,7 +45,7 @@ function useFcmToken() {
     getToken();
   }, [user]);
 
-  return token;
+  return token ?? "";
 }
 
 export default useFcmToken;

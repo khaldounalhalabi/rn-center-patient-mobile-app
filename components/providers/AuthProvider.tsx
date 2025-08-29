@@ -9,7 +9,7 @@ const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
     if (user && !user.phone_verified_at && initialized) {
       router.replace("/verify-phone");
     }
-  }, [user, initialized]);
+  }, [user, initialized, router]);
   return <>{children}</>;
 };
 

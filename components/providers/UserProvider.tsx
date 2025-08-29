@@ -1,5 +1,5 @@
 "use client";
-import { getToken, setUser } from "@/helpers/helpers";
+import { setUser } from "@/helpers/helpers";
 import { User } from "@/models/User";
 import { AuthService } from "@/services/AuthService";
 import { createContext, useCallback, useEffect, useState } from "react";
@@ -16,12 +16,7 @@ const UserProvider = ({ children }: { children?: React.ReactNode }) => {
   const [user, updateUser] = useState<User | undefined>(undefined);
   const [isInitialized, setIsInitialized] = useState(false);
   const service = AuthService.make();
-  useEffect(() => {
-    initializeUser().then(() => {
-      setIsInitialized(true);
-    });
-  }, []);
-
+  
   const fillUser = useCallback((newUser: User | undefined) => {
     if (newUser) {
       setUser(newUser);
@@ -32,7 +27,7 @@ const UserProvider = ({ children }: { children?: React.ReactNode }) => {
     }
   }, []);
 
-  const initializeUser = async () => {
+  const initializeUser = useCallback(async () => {
     setIsInitialized(false);
     const res = await service.userDetails();
     if (res.ok()) {
@@ -40,7 +35,12 @@ const UserProvider = ({ children }: { children?: React.ReactNode }) => {
       await setUser(res.data);
     }
     return res.data;
-  };
+  }, [fillUser, service]);
+  useEffect(() => {
+    initializeUser().then(() => {
+      setIsInitialized(true);
+    });
+  }, [initializeUser]);
 
   if (!isInitialized) {
     return <LoadingScreen />;

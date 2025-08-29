@@ -8,14 +8,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
-import useUser from "@/hooks/UserHook";
 import { useTranslation } from "@/localization";
 import { AuthService } from "@/services/AuthService";
-import { useRouter } from "expo-router";
 import { View } from "react-native";
 
 const ResetPassword = () => {
-  const router = useRouter();
   const { t } = useTranslation();
   const service = AuthService.make();
   const handleSubmit = (data: { phone: string }) => {

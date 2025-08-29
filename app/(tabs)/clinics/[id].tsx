@@ -51,9 +51,10 @@ const Clinic = () => {
     return days;
   }
 
+  const holidayService = HolidayService.make();
   const { data: holidays, isLoading: loadingHolidays } = useQuery({
     queryKey: ["holidays_data"],
-    queryFn: async () => await HolidayService.make().activeHolidays(),
+    queryFn: async () => await holidayService.activeHolidays(),
     select(data) {
       let dates: Dayjs[] = [];
       data.data?.forEach((h) => {
@@ -62,13 +63,14 @@ const Clinic = () => {
       });
       return dates;
     },
-    enabled: user != undefined && user != null,
+    enabled: user !== undefined && user != null,
   });
 
+  const vacationService = VacationService.make();
   const { data: vacations, isLoading: loadingVacations } = useQuery({
     queryKey: ["vacations_data"],
-    queryFn: async () => await VacationService.make().activeByClinic(clinicId),
-    enabled: user != undefined && user != null,
+    queryFn: async () => await vacationService.activeByClinic(clinicId),
+    enabled: user !== undefined && user != null,
     select(data) {
       let dates: Dayjs[] = [];
       data.data?.forEach((v) => {
@@ -87,11 +89,12 @@ const Clinic = () => {
     },
   });
 
+  const appointmentService = AppointmentService.make();
   const { data: availableTimes, isLoading: isLoadingAvailableTimes } = useQuery(
     {
       queryKey: ["available_times", clinicId, date?.format("YYYY-MM-DD")],
       queryFn: async () => {
-        return await AppointmentService.make().getAvailableTimes(
+        return await appointmentService.getAvailableTimes(
           clinicId ?? 0,
           date?.format("YYYY-MM-DD") ?? "",
         );
@@ -103,7 +106,6 @@ const Clinic = () => {
     },
   );
 
-  const appointmentService = AppointmentService.make();
   const book = async () => {
     const response = await appointmentService.store({
       date_time: datetime?.format("YYYY-MM-DD HH:mm"),
@@ -202,7 +204,7 @@ const Clinic = () => {
               <FormSelect
                 label={t("common.appointment.create.time")}
                 options={
-                  availableTimes.length == 0
+                  availableTimes?.length === 0
                     ? [t("components.no_data")]
                     : availableTimes
                 }

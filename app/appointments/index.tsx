@@ -224,7 +224,7 @@ const Appointments = () => {
     if (payload.type === NotificationsTypeEnum.AppointmentEvent) {
       refetch();
     }
-  }, []);
+  }, [refetch]);
 
   useNotificationHandler({
     handle: handleNotification,
