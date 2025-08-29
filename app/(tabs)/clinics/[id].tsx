@@ -218,7 +218,17 @@ const Clinic = () => {
         </DialogContent>
       </Dialog>
 
-      <Button variant={"secondary"}>
+      <Button
+        variant={"secondary"}
+        onPress={() => {
+          router.push({
+            pathname: "/clinics/schedules/[id]",
+            params: {
+              id: clinicId,
+            },
+          });
+        }}
+      >
         <Text>{t("patient_app.doctor_schedule")}</Text>
       </Button>
     </Page>

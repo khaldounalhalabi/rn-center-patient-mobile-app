@@ -19,6 +19,7 @@ import {
   PowerOff,
   Settings,
   SlidersHorizontal,
+  Stethoscope,
   Target,
   Timer,
   TrendingUp,
@@ -53,6 +54,7 @@ iconWithClassName(BookCheck);
 iconWithClassName(Archive);
 iconWithClassName(FileStack);
 iconWithClassName(LogIn);
+iconWithClassName(Stethoscope);
 iconWithClassName(UserPlus);
 
 export {
@@ -76,6 +78,7 @@ export {
   PowerOff,
   Settings,
   SlidersHorizontal,
+  Stethoscope,
   Target,
   Timer,
   TrendingUp,

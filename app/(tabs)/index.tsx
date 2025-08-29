@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import useUser from "@/hooks/UserHook";
-import { LogIn, UserPlus } from "@/lib/icons/icons";
+import { LogIn, Stethoscope, UserPlus } from "@/lib/icons/icons";
 import { useTranslation } from "@/localization";
 import { NotificationPayload } from "@/models/NotificationPayload";
 import { AppointmentService } from "@/services/AppointmentService";
@@ -20,7 +20,6 @@ import {
   FileText,
   Paperclip,
   Pill,
-  Stethoscope,
 } from "lucide-react-native";
 import React from "react";
 import { ScrollView, View } from "react-native";

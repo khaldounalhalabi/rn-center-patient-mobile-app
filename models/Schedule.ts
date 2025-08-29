@@ -1,5 +1,5 @@
-import { Clinic } from "@/models/Clinic";
 import WeekDayEnum from "@/enums/WeekDayEnum";
+import { Clinic } from "@/models/Clinic";
 
 export interface Schedule {
   id?: number;
@@ -10,12 +10,4 @@ export interface Schedule {
   clinic?: Clinic;
 }
 
-export interface SchedulesCollection {
-  saturday: Schedule[];
-  sunday: Schedule[];
-  monday: Schedule[];
-  tuesday: Schedule[];
-  wednesday: Schedule[];
-  thursday: Schedule[];
-  friday: Schedule[];
-}
+export interface SchedulesCollection extends Record<WeekDayEnum, Schedule[]> {}

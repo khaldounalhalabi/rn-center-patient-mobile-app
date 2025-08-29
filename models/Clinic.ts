@@ -1,5 +1,6 @@
-import { User } from "@/models/User";
 import { Speciality } from "@/models/Speciality";
+import { User } from "@/models/User";
+import { SchedulesCollection } from "./Schedule";
 
 export type Clinic = {
   id: number;
@@ -13,4 +14,5 @@ export type Clinic = {
   today_appointments_count: number;
   upcoming_appointments_count: number;
   specialities?: Speciality[];
+  schedules?: SchedulesCollection;
 };
